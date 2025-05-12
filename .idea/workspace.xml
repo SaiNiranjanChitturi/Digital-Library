@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72414070-8ac8-4850-bd7f-b9c29dfdac84" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Backend/dlms-backend/dlms-backend/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/dlms-backend/dlms-backend/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/dlms-backend/dlms-backend/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/dlms-backend/dlms-backend/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/dlms-backend/dlms-backend/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/dlms-backend/dlms-backend/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/dlms-backend/dlms-backend/src/main/java/com/springanil/dlms_backend/DlmsBackendApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/dlms-backend/dlms-backend/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/dlms-backend/dlms-backend/src/test/java/com/springanil/dlms_backend/DlmsBackendApplicationTests.java" beforeDir="false" />
-    </list>
+    <list default="true" id="72414070-8ac8-4850-bd7f-b9c29dfdac84" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
