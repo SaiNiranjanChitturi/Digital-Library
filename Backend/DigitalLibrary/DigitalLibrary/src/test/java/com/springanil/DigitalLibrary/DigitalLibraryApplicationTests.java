@@ -1,10 +1,10 @@
-package com.springanil.dlms_backend;
+package com.springanil.DigitalLibrary;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DlmsBackendApplicationTests {
+class DigitalLibraryApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -1,13 +1,13 @@
-package com.springanil.dlms_backend;
+package com.springanil.DigitalLibrary;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DlmsBackendApplication {
+public class DigitalLibraryApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DlmsBackendApplication.class, args);
+		SpringApplication.run(DigitalLibraryApplication.class, args);
 	}
 
 }
