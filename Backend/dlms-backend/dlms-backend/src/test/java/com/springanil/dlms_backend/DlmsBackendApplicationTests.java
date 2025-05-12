@@ -1,10 +1,10 @@
-package com.springanil.lms;
+package com.springanil.dlms_backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class LmsBackendApplicationTests {
+class DlmsBackendApplicationTests {
 
 	@Test
 	void contextLoads() {

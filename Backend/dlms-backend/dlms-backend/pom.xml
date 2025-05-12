@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.springanil</groupId>
-	<artifactId>lms-backend</artifactId>
+	<artifactId>dlms-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>lms-backend</name>
-	<description>Demo project for Spring Boot Library Management System</description>
+	<name>dlms-backend</name>
+	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
 		<license/>
