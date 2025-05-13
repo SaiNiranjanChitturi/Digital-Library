@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class Hello {
 
-    @RequestMapping("/")
+    @RequestMapping("/api/helloworld")
     public String greet(){
         return "Hello World, Welcome to Digital Library";
     }
