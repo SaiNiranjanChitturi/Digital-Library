@@ -3,7 +3,7 @@ import Logo from '../images/digital-library-logo.png';
 function Login() {
     return (
         <div className="d-flex justify-content-center align-items-center" style={{ backgroundColor: '#0074d9',width:'100vw', height: '100vh'}}>
-        <div className= "bg-white text-white p-4 rounded shadow login-container" style={{ width: '480px', height: '620px'}}>
+        <div className= "bg-white text-white p-4 rounded shadow login-container" style={{ width:'420px', height:'620px', maxwidth: '420px', maxheight: '620px'}}>
             <h2 className="text-center mt-5" style={ {color: '#0074d9'}}>Digital Library<br/></h2>
             <div className="text-center">
                 <img src= {Logo} alt="Library" height="100 px" width="100 px" className="img-fluid" /> 
