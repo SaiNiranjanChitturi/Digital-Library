@@ -2,7 +2,7 @@
 
 <beans>
 
-<!--    <bean id="hlo" clas="com.springanil.DigitalLibrary.controller.Hello" >-->
+<!--    <bean id="hlo" clas="com.springanil.DigitalLibrary.controller.UserController" >-->
 
 <!--    </bean>-->
 
