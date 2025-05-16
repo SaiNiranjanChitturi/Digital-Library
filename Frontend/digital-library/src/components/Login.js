@@ -17,6 +17,8 @@ function Login() {
             });
             if(response.ok) {
                 const data = await response.json();
+                localStorage.setItem('token', data.token);
+                window.location.href = '/Home';
                 console.log('Login successful:', data);
             } else {
                 const errorData = await response.json();
