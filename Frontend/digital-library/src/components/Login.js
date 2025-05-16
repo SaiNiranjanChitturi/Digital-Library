@@ -17,6 +17,9 @@ function Login() {
             });
             if(response.ok) {
                 const data = await response.json();
+                localStorage.setItem('token', data.token); // Store the token in local storage
+                // Redirect to the dashboard or home page
+                window.location.href = '/Home'; // Change this to your desired route
                 console.log('Login successful:', data);
             } else {
                 const errorData = await response.json();
