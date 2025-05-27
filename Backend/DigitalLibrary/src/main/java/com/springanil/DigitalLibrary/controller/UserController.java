@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -42,7 +41,7 @@ public class UserController {
 //    }
 
     @GetMapping("/")
-    public String greet() {
+    public String getloginpage( ) {
         return "Welcome anil, you did it!";
     }
 
