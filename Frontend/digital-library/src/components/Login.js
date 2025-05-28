@@ -35,8 +35,20 @@ function Login() {
         }
     }
     return (
-        <div className="d-flex justify-content-center align-items-center" style={{ backgroundColor: '#0074d9',width:'100vw', height: '100vh'}}>
-            <div className= "shadow-lg bg-white text-white p-4 rounded shadow login-container" style={{ width:'420px', height:'620px', maxWidth: '420px', maxHeight: '620px'}}>
+        <div className="d-flex justify-content-center align-items-center" style={{ 
+            backgroundColor: '#0074d9',
+            minHeight: '100vh',
+            minWidth: '100%',
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            overflow: 'auto'
+        }}>
+            <div className="shadow-lg bg-white text-white p-4 rounded shadow login-container" style={{ 
+                width: 'min(90%, 420px)',
+                height: 'min(90vh, 620px)',
+                margin: '20px auto'
+            }}>
                 <h2 className="text-center mt-5" style={ {color: '#0074d9'}}>Digital Library<br/></h2>
                 <div className="text-center">
                     <img src= {Logo} alt="Library" height="100 px" width="100 px" className="img-fluid" /> 
