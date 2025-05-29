@@ -1,20 +1,36 @@
 package com.springanil.DigitalLibrary.service;
 
-import java.util.List;
-
-import com.springanil.DigitalLibrary.model.User;
-import com.springanil.DigitalLibrary.repository.UserRepository;
+import com.springanil.DigitalLibrary.model.Users;
+import com.springanil.DigitalLibrary.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+
 
 @Service
 public class Userservice {
 
     @Autowired
-    private UserRepository repo;
+    private UsersRepository repo;
 
-    public List<User> getAllProducts(){
-        return repo.findAll();
+    @Autowired
+    private AuthenticationManager authManager;
+
+    @Autowired
+    private com.springanil.DigitalLibrary.service.JwtService JwtService;
+
+
+    public String verifyUser(Users user) {
+        Authentication authentication =
+            authManager.authenticate(
+                new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword())
+            );
+
+        if(authentication.isAuthenticated())
+            return JwtService.generateToken(user.getEmail());
+        return "failure";
+
     }
 }

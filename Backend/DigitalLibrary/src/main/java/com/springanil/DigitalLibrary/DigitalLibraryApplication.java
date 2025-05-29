@@ -10,7 +10,6 @@ public class DigitalLibraryApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DigitalLibraryApplication.class, args);
-
 	}
 
 }
