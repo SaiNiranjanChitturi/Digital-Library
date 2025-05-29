@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.context.ApplicationContext;
 
 import java.io.IOException;
 
@@ -19,6 +20,9 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtService jwtService;
+
+    @Autowired
+    ApplicationContext context;
 
     @Autowired
     private UserDetailsServiceImpl userDetailsService; // Custom UserDetailsService
@@ -36,13 +40,13 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+            UserDetails userDetails =  context.getBean(UserDetailsServiceImpl.class).  loadUserByUsername(username); ;
 
-            if (jwtService.validateToken(token)) {
-                UsernamePasswordAuthenticationToken authenticationToken =
+             if( jwtService.validateToken(token, userDetails)) {
+                UsernamePasswordAuthenticationToken authtoken =
                         new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                authtoken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(authtoken);
             }
         }
 
