@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Entity
 @Data
-@Table(name = "Users")
+@Table(name = "users")
 public class Users {
 
     @Id
@@ -16,13 +16,13 @@ public class Users {
 
     @Column(name ="USERNAME", nullable = false, unique = true, length = 45)
     private String email;
-    public String getEmail() {
-        return email;
-    }
+//    public String getEmail() {
+//        return email;
+//    }
 
     @Column(name= "PASSWORD", nullable = false, length = 45)
     private String password;
-    public String getPassword() {
-        return password;
-    }
+//    public String getPassword() {
+//        return password;
+//    }
 }

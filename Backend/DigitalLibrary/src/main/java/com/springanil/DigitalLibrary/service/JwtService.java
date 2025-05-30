@@ -8,39 +8,38 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
+import static javax.crypto.Cipher.SECRET_KEY;
+
 @Service
 public class JwtService {
 
     private final String secretKey = "yourSecretKey"; // Replace with a secure key
-    private final long expirationTime = 1000 * 60 * 60; // 1 hour
 
     // Generate JWT token
-    public String generateToken(String username) {
+    public String generateToken(String email) {
         return Jwts.builder()
-                .setSubject(username)
+                .setSubject(email)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }
 
     // Validate JWT token
-    public boolean validateToken(String token) {
-        try {
-            Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+    public String extractemail(String token) {
+        return Jwts.parser()
+                .setSigningKey(secretKey)
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
     }
-
     // Extract username from JWT token
-    public String extractUsername(String token) {
-        Claims claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
-        return claims.getSubject();
-    }
-
-    public boolean validateToken(String token, UserDetails userDetails) {
-        return true;
+    public Boolean isTokenExpired(String token) {
+        final Date expiration = Jwts.parser()
+                .setSigningKey(secretKey)
+                .parseClaimsJws(token)
+                .getBody()
+                .getExpiration();
+        return expiration.before(new Date());
     }
 }
