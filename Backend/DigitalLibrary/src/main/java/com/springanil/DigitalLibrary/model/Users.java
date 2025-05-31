@@ -14,15 +14,20 @@ public class Users {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    @Column(name ="USERNAME", nullable = false, unique = true, length = 45)
+    @Column(unique = true)
     private String email;
-//    public String getEmail() {
-//        return email;
-//    }
+    public String getEmail() {
+         return this.email;
+    }
 
-    @Column(name= "PASSWORD", nullable = false, length = 45)
+
     private String password;
-//    public String getPassword() {
-//        return password;
-//    }
+    public String getPassword() {
+        return this.password;
+    }
+    // In `Users.java`
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 }

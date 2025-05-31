@@ -16,12 +16,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private UsersRepository usersRepository; // Your user repository
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         // Implement user lookup and return a UserDetails object
         // Example:
         // This approach fetches all users and filters by email
         Users user = usersRepository.findAll().stream()
-            .filter(u -> u.getEmail().equals(username))
+            .filter(u -> u.getEmail().equals(email))
             .findFirst()
             .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         return new org.springframework.security.core.userdetails.User(

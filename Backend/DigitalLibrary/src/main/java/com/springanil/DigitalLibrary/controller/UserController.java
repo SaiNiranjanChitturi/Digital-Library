@@ -9,9 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.Optional;
@@ -32,7 +30,7 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody Users user) {
-        if (userRepository.findByUsername(user.getEmail()).isPresent()) {
+        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Username already exists");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -40,9 +38,9 @@ public class UserController {
         return ResponseEntity.ok("User registered successfully");
     }
 
-    @PostMapping("/login")
+    @PostMapping("/api/login")
     public ResponseEntity<?> login(@RequestBody Users user) {
-        Optional<Users> optionalUser = userRepository.findByUsername(user.getEmail());
+        Optional<Users> optionalUser = userRepository.findByEmail(user.getEmail());
         if (optionalUser.isPresent()) {
             Users existingUser = optionalUser.get();
             if (passwordEncoder.matches(user.getPassword(), existingUser.getPassword())) {
@@ -52,5 +50,16 @@ public class UserController {
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
     }
+
+    @RestController
+    public static class TestController {
+
+        @GetMapping("/hello")
+        public String hello() {
+            return "Backend is up!";
+        }
+    }
+
+
 }
 
