@@ -46,8 +46,8 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            Optional<Users> optionalUser = userRepository.findByEmail(email);
-            if (optionalUser.isPresent() && !jwtService.isTokenExpired(jwt)) {
+            Users user = userRepository.findByEmail(email);
+            if (user != null && !jwtService.isTokenExpired(jwt)) {
                 UsernamePasswordAuthenticationToken authenticationToken =
                         new UsernamePasswordAuthenticationToken(email, null, new ArrayList<>());
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
@@ -56,4 +56,10 @@ public class JwtFilter extends OncePerRequestFilter {
 
         filterChain.doFilter(request, response);
     }
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        String path = request.getRequestURI();
+        return path.equals("/api/login") || path.startsWith("/api/auth/");
+    }
+
 }
