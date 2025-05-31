@@ -1,39 +1,36 @@
 import React, {useState} from 'react';
 import Logo from '../images/digital-library-logo.png';
+import axios from 'axios';
+
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
         setError('');
+        
         try {
-            const response = await fetch('http://localhost:8085/api/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password }),
+            const response = await axios.post('http://localhost:8085/api/login', {
+                email,
+                password
             });
-            if(response.ok) {
-                const data = await response.json();
-                localStorage.setItem('token', data.token);
-                window.location.href = '/Home';
-                console.log('Login successful:', data);
-            } else {
-                const errorData = await response.json();
-                setError(errorData.message || 'Login failed');
-            }
 
-        }
-        catch (error) {
+            localStorage.setItem('token', response.data.token);
+            window.location.href = '/Home';
+            console.log('Login successful:', response.data);
+            
+        } catch (error) {
             console.error('Error:', error);
-            setError('An error occurred. Please try again later.');
-        }
-        finally {
+            setError(error.response?.data?.message || 'An error occurred. Please try again later.');
+        } finally {
             setIsLoading(false);
         }
     }
+
     return (
         <div className="d-flex justify-content-center align-items-center" style={{ 
             backgroundColor: '#0074d9',
@@ -78,11 +75,12 @@ function Login() {
                     </div>
                     <div className="mb-3 text-center">
                         <p style={ {color: '#0074d9',  fontWeight:'bolder'}}>New here? SignUp below!</p>
-                        <button type="button" className="btn btn-primary">SignUp</button>
+                        <button type="button" className="btn btn-primary"  onClick={() => window.location.href = '/register'}>Register</button>
                     </div>
                 </form>
             </div>
         </div>
     );
 }
+
 export default Login;
