@@ -4,6 +4,7 @@ import com.springanil.DigitalLibrary.model.Users;
 import com.springanil.DigitalLibrary.repository.UsersRepository;
 import com.springanil.DigitalLibrary.service.JwtService;
 import com.springanil.DigitalLibrary.service.Userservice;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,11 +13,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/api")
 public class UserController {
 
     @Autowired
@@ -39,16 +42,21 @@ public class UserController {
     }
 
     @PostMapping("/api/login")
-    public ResponseEntity<?> login(@RequestBody Users user) {
-        Optional<Users> optionalUser = userRepository.findByEmail(user.getEmail());
-        if (optionalUser.isPresent()) {
-            Users existingUser = optionalUser.get();
-            if (passwordEncoder.matches(user.getPassword(), existingUser.getPassword())) {
-                String token = jwtService.generateToken(existingUser.getEmail());
-                return ResponseEntity.ok(Collections.singletonMap("token", token));
-            }
+    public ResponseEntity<?> login(@RequestBody Map<String, String> loginData) {
+        String email = loginData.get("email");
+        String password = loginData.get("password");
+
+        User user = userRepository.findByEmail(email);
+
+        if (user == null || !user.getPassword().equals(password)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("message", "Invalid email or password"));
         }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+
+        // mock token for dev:
+        String token = UUID.randomUUID().toString();
+
+        return ResponseEntity.ok(Map.of("message", "Login successful", "token", token));
     }
 
     @RestController
