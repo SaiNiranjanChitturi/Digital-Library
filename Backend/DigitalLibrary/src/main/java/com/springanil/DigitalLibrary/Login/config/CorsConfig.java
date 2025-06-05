@@ -1,4 +1,4 @@
-package com.springanil.DigitalLibrary.config;
+package com.springanil.DigitalLibrary.Login.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,8 +1,8 @@
-package com.springanil.DigitalLibrary.controller;
+package com.springanil.DigitalLibrary.Login.controller;
 
-import com.springanil.DigitalLibrary.model.Users;
-import com.springanil.DigitalLibrary.repository.UsersRepository;
-import com.springanil.DigitalLibrary.service.JwtService;
+import com.springanil.DigitalLibrary.Login.model.Users;
+import com.springanil.DigitalLibrary.Login.repository.UsersRepository;
+import com.springanil.DigitalLibrary.Login.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,9 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.Map;
-import java.util.Optional;
 import java.util.UUID;
 
 

@@ -1,4 +1,4 @@
-package com.springanil.DigitalLibrary.model;
+package com.springanil.DigitalLibrary.Login.model;
 
 import jakarta.persistence.*;
 import lombok.Data;

@@ -1,10 +1,8 @@
-package com.springanil.DigitalLibrary.repository;
+package com.springanil.DigitalLibrary.Login.repository;
 
-import com.springanil.DigitalLibrary.model.Users;
+import com.springanil.DigitalLibrary.Login.model.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import java.util.Optional;
 
 
 @Repository
