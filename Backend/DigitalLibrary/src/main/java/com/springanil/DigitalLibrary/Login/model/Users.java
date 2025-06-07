@@ -1,13 +1,13 @@
 package com.springanil.DigitalLibrary.Login.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Data
 @Table(name = "users")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Users {
 
     @Id
@@ -16,16 +16,17 @@ public class Users {
 
     @Column(unique = true)
     private String email;
+
+    private String password;
+
     public String getEmail() {
          return this.email;
     }
 
-
-    private String password;
     public String getPassword() {
         return this.password;
     }
-    // In `Users.java`
+
     public void setPassword(String password) {
         this.password = password;
     }

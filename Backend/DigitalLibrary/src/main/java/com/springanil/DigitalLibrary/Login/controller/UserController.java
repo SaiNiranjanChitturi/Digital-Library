@@ -1,5 +1,7 @@
 package com.springanil.DigitalLibrary.Login.controller;
 
+import com.springanil.DigitalLibrary.Home.model.Book;
+import com.springanil.DigitalLibrary.Home.service.BookService;
 import com.springanil.DigitalLibrary.Login.model.Users;
 import com.springanil.DigitalLibrary.Login.repository.UsersRepository;
 import com.springanil.DigitalLibrary.Login.service.JwtService;
@@ -10,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -64,6 +67,14 @@ public class UserController {
         }
     }
 
+//  BOOK CONTROLLER
 
+    @Autowired
+    private BookService service;
+
+    @GetMapping("/products")
+    public List<Book> getAllBooks() {
+
+        return service.getAllBooks();
+    }
 }
-
