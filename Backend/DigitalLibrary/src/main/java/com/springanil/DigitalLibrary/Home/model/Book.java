@@ -1,6 +1,6 @@
 package com.springanil.DigitalLibrary.Home.model;
 
-public class Product {
+public class Book {
 
     private int id;
     private String name;
@@ -8,10 +8,10 @@ public class Product {
     private double price;
     private String imageUrl;
 
-    public Product() {
+    public Book() {
     }
 
-    public Product(int id, String name, String description, double price, String imageUrl) {
+    public Book(int id, String name, String description, double price, String imageUrl) {
         this.id = id;
         this.name = name;
         this.description = description;
