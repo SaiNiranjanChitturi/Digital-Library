@@ -6,6 +6,7 @@ import Login from './components/Login';
 import NotFound from './components/NotFound';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Register from './components/Register';
+import SalePage from './components/sale';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/Home" element={<Home />} />
+        <Route path="/Sale" element={<SalePage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

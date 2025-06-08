@@ -28,8 +28,8 @@ function Header() {
     const [cartItems, setCartItems] = useState([]);
     
     const sections = [
-        { name: 'Browse', path: '/browse' },
-        { name: 'Collections', path: '/collections' },
+        { name: 'Sale', path: '/Sale' },
+        { name: 'Collections', path: '/Collections' },
         { name: 'New Releases', path: '/new-releases' },
         { name: 'My Library', path: '/my-library' }
     ];
