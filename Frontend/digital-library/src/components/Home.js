@@ -12,6 +12,7 @@ import {
     useMediaQuery 
 } from '@mui/material';
 import Header from './Header';
+import Footer from './Footer';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import PeopleIcon from '@mui/icons-material/People';
 import CategoryIcon from '@mui/icons-material/Category';
@@ -20,7 +21,6 @@ import SearchIcon from '@mui/icons-material/Search';
 function Home() {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-    const isTablet = useMediaQuery(theme.breakpoints.down('md'));
 
     const features = [
         {
@@ -46,17 +46,18 @@ function Home() {
     ];
 
     return (
-        <Box sx={{ minHeight: '100vh', bgcolor: '#f5f5f5' }}>
+        <Box sx={{ minHeight: '100vh', bgcolor: '#f8f9fa', display: 'flex', flexDirection: 'column' }}>
             <Header />
             
             {/* Hero Section */}
             <Box
                 sx={{
-                    bgcolor: '#0074d9',
+                    bgcolor: '#1e90ff', // Changed from #0074d9 to a lighter blue
                     color: 'white',
                     py: { xs: 8, sm: 10, md: 12 },
                     mb: { xs: 4, sm: 6, md: 8 },
-                    textAlign: 'center'
+                    textAlign: 'center',
+                    boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
                 }}
             >
                 <Container maxWidth="lg">
@@ -66,7 +67,8 @@ function Home() {
                         sx={{ 
                             mb: 3, 
                             fontWeight: 'bold',
-                            fontSize: { xs: '2rem', sm: '3rem', md: '3.75rem' }
+                            fontSize: { xs: '2rem', sm: '3rem', md: '3.75rem' },
+                            color: 'white'
                         }}
                     >
                         Welcome to Digital Library
@@ -77,7 +79,8 @@ function Home() {
                             mb: 4,
                             px: { xs: 2, sm: 4, md: 8 },
                             maxWidth: '800px',
-                            mx: 'auto'
+                            mx: 'auto',
+                            color: 'rgba(255,255,255,0.87)'
                         }}
                     >
                         Your gateway to endless knowledge and entertainment
@@ -87,11 +90,11 @@ function Home() {
                         size={isMobile ? "medium" : "large"}
                         sx={{ 
                             bgcolor: 'white', 
-                            color: '#0074d9',
+                            color: '#1e90ff',  // Updated button color to match new theme
                             px: { xs: 3, sm: 4, md: 6 },
                             py: { xs: 1, sm: 1.5 },
                             '&:hover': {
-                                bgcolor: '#f0f0f0'
+                                bgcolor: 'rgba(255,255,255,0.9)'
                             }
                         }}
                     >
@@ -103,7 +106,7 @@ function Home() {
             {/* Features Section */}
             <Box 
                 sx={{ 
-                    bgcolor: 'white', 
+                    bgcolor: 'white',
                     py: { xs: 6, sm: 8, md: 10 },
                     borderRadius: 0
                 }}
@@ -115,7 +118,7 @@ function Home() {
                         sx={{ 
                             mb: { xs: 6, sm: 8 },
                             textAlign: 'center',
-                            color: '#0074d9',
+                            color: '#2c3e50',
                             fontWeight: 'bold'
                         }}
                     >
@@ -141,7 +144,8 @@ function Home() {
                                         textAlign: 'center',
                                         p: 4,
                                         borderRadius: 4,
-                                        boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+                                        bgcolor: 'white',
+                                        boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
                                         transition: 'all 0.3s ease',
                                         '&:hover': {
                                             transform: 'translateY(-8px)',
@@ -193,14 +197,19 @@ function Home() {
             </Box>
 
             {/* Featured Books Section */}
-            <Box sx={{ bgcolor: 'white', py: { xs: 6, sm: 8, md: 10 } }}>
+            <Box sx={{ 
+                bgcolor: '#f8f9fa',
+                py: { xs: 6, sm: 8, md: 10 }
+            }}>
                 <Container maxWidth="lg">
                     <Typography 
                         variant={isMobile ? "h4" : "h3"} 
                         component="h2" 
                         sx={{ 
                             mb: { xs: 3, sm: 4, md: 5 }, 
-                            textAlign: 'center' 
+                            textAlign: 'center',
+                            color: '#2c3e50',
+                            fontWeight: 'bold'
                         }}
                     >
                         Featured Books
@@ -210,10 +219,12 @@ function Home() {
                             <Grid item xs={12} sm={6} md={3} key={book}>
                                 <Card sx={{ 
                                     height: '100%',
+                                    bgcolor: 'white',
                                     transition: 'all 0.3s ease',
+                                    boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
                                     '&:hover': {
                                         transform: 'translateY(-5px)',
-                                        boxShadow: 3
+                                        boxShadow: '0 8px 25px rgba(0,0,0,0.15)'
                                     }
                                 }}>
                                     <CardMedia
@@ -222,16 +233,20 @@ function Home() {
                                         image={`https://picsum.photos/200/300?random=${book}`}
                                         alt="Book cover"
                                     />
-                                    <CardContent sx={{ p: { xs: 1.5, sm: 2 } }}>
+                                    <CardContent sx={{ 
+                                        p: { xs: 1.5, sm: 2 },
+                                        bgcolor: 'white'
+                                    }}>
                                         <Typography 
                                             gutterBottom 
                                             variant={isMobile ? "subtitle1" : "h6"}
+                                            sx={{ color: '#2c3e50' }}
                                         >
                                             Book Title {book}
                                         </Typography>
                                         <Typography 
                                             variant="body2" 
-                                            color="text.secondary"
+                                            sx={{ color: '#6c757d' }}
                                         >
                                             Author Name
                                         </Typography>
@@ -242,6 +257,7 @@ function Home() {
                     </Grid>
                 </Container>
             </Box>
+            <Footer />
         </Box>
     );
 }
