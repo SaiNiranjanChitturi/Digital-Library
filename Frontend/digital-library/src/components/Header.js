@@ -29,7 +29,7 @@ function Header() {
     
     const sections = [
         { name: 'Sale', path: '/Sale' },
-        { name: 'Collections', path: '/Collections' },
+        { name: 'Collection', path: '/Collection' },
         { name: 'New Releases', path: '/new-releases' },
         { name: 'My Library', path: '/my-library' }
     ];
