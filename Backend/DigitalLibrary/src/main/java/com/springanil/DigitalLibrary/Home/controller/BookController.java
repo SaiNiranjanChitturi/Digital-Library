@@ -22,6 +22,13 @@ public class BookController {
 
     @PostMapping
     public Book addBook(@RequestBody  Book book) {
+        System.out.println("Received Book: " + book);
         return service.saveBook(book);
     }
+
+    @GetMapping("/{id}")
+    public Book getBookById(@PathVariable int id) {
+        return service.getBookById(id);
+    }
+
 }

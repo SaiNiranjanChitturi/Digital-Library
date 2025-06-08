@@ -1,25 +1,36 @@
 package com.springanil.DigitalLibrary.Home.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "book")
 public class Book {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
-    private String name;
+
+    @JsonProperty("description")
+    @Column(name = "description")
     private String description;
-    private double price;
+
+    @JsonProperty("image_url")
+    @Column(name = "image_url")
     private String imageUrl;
+
+    @JsonProperty("name")
+    @Column(name = "name")
+    private String name;
+
+    @JsonProperty("price")
+    @Column(name = "price")
+    private double price;
 
 }

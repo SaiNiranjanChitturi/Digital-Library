@@ -20,4 +20,8 @@ public class BookService {
     public Book saveBook(Book book) {
         return repo.save(book);
     }
+
+    public Book getBookById(int id) {
+        return repo.findById(id).orElseThrow(() -> new RuntimeException("Book not found with id: " + id));
+    }
 }
