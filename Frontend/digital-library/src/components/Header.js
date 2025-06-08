@@ -30,8 +30,8 @@ function Header() {
     const sections = [
         { name: 'Sale', path: '/Sale' },
         { name: 'Collection', path: '/Collection' },
-        { name: 'New Releases', path: '/new-releases' },
-        { name: 'My Library', path: '/my-library' }
+        { name: 'New Releases', path: '/New' },
+        { name: 'My Library', path: '/MyLibrary' }
     ];
 
     // Cart handlers
