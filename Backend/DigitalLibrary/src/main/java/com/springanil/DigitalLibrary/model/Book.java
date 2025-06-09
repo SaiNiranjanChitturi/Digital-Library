@@ -1,4 +1,4 @@
-package com.springanil.DigitalLibrary.Home.model;
+package com.springanil.DigitalLibrary.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

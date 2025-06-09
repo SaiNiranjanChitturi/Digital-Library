@@ -1,6 +1,6 @@
-package com.springanil.DigitalLibrary.Login.config;
+package com.springanil.DigitalLibrary.config;
 
-import com.springanil.DigitalLibrary.Login.repository.UsersRepository;
+import com.springanil.DigitalLibrary.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +24,7 @@ public class SecurityConfig {
     private JwtFilter jwtFilter;
 
     @Autowired
-    private UsersRepository userRepository;
+    private UserRepository userRepository;
 
     @Bean
     public PasswordEncoder passwordEncoder() {

@@ -1,8 +1,8 @@
-package com.springanil.DigitalLibrary.Login.config;
+package com.springanil.DigitalLibrary.config;
 
-import com.springanil.DigitalLibrary.Login.model.Users;
-import com.springanil.DigitalLibrary.Login.repository.UsersRepository;
-import com.springanil.DigitalLibrary.Login.service.JwtService;
+import com.springanil.DigitalLibrary.model.Users;
+import com.springanil.DigitalLibrary.repository.UserRepository;
+import com.springanil.DigitalLibrary.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,9 +19,9 @@ import java.util.ArrayList;
 @Component
 public class JwtFilter extends OncePerRequestFilter {
     private JwtService jwtService;
-    private UsersRepository userRepository;
+    private UserRepository userRepository;
 
-    public JwtFilter(JwtService jwtService, UsersRepository userRepository) {
+    public JwtFilter(JwtService jwtService, UserRepository userRepository) {
         this.jwtService = jwtService;
         this.userRepository = userRepository;
     }

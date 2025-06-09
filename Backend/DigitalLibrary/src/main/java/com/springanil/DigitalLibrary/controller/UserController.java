@@ -1,10 +1,10 @@
-package com.springanil.DigitalLibrary.Login.controller;
+package com.springanil.DigitalLibrary.controller;
 
-import com.springanil.DigitalLibrary.Home.model.Book;
-import com.springanil.DigitalLibrary.Home.service.BookService;
-import com.springanil.DigitalLibrary.Login.model.Users;
-import com.springanil.DigitalLibrary.Login.repository.UsersRepository;
-import com.springanil.DigitalLibrary.Login.service.JwtService;
+import com.springanil.DigitalLibrary.model.Book;
+import com.springanil.DigitalLibrary.service.BookService;
+import com.springanil.DigitalLibrary.model.Users;
+import com.springanil.DigitalLibrary.repository.UserRepository;
+import com.springanil.DigitalLibrary.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +22,7 @@ import java.util.UUID;
 public class UserController {
 
     @Autowired
-    private UsersRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private JwtService jwtService;

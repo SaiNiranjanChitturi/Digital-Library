@@ -1,7 +1,7 @@
-package com.springanil.DigitalLibrary.Home.service;
+package com.springanil.DigitalLibrary.service;
 
-import com.springanil.DigitalLibrary.Home.model.Book;
-import com.springanil.DigitalLibrary.Home.repository.BookRepo;
+import com.springanil.DigitalLibrary.model.Book;
+import com.springanil.DigitalLibrary.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import java.util.List;
 public class BookService {
 
     @Autowired
-    private BookRepo repo;
+    private BookRepository repo;
 
     public List<Book> getAllBooks() {
         return repo.findAll();

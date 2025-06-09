@@ -1,4 +1,4 @@
-package com.springanil.DigitalLibrary.Login.service;
+package com.springanil.DigitalLibrary.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
