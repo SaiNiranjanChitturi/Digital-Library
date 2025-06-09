@@ -29,8 +29,25 @@ public class Book {
     @Column(name = "name")
     private String name;
 
+    @JsonProperty("author")
+    @Column(name = "author")
+    private String author;
+
+    @JsonProperty("category")
+    @Column(name = "category")
+    private String category;
+
+    @JsonProperty("rating")
+    @Column(name = "rating")
+    private int rating;
+
     @JsonProperty("price")
     @Column(name = "price")
     private double price;
+
+    @JsonProperty("sale")
+    @Column(name = "sale")
+    private int sale;
+
 
 }
