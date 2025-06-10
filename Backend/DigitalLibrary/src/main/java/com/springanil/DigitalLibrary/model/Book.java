@@ -6,16 +6,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Data
+
 @Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "book")
-
-
+@Table(name = "books")
 public class Book {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @JsonProperty("title")
@@ -40,7 +40,7 @@ public class Book {
 
     @JsonProperty("sale_percentage")
     @Column(name = "sale_percentage")
-    private double sale;
+    private double sale_percentage;
 
     @JsonProperty("description")
     @Column(name = "description")
@@ -48,6 +48,6 @@ public class Book {
 
     @JsonProperty("image_url")
     @Column(name = "image_url")
-    private String imageUrl;
+    private String image_url;
 
 }

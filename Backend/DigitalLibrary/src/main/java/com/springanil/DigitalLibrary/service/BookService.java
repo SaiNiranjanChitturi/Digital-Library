@@ -11,17 +11,17 @@ import java.util.List;
 public class BookService {
 
     @Autowired
-    private BookRepository repo;
+    private BookRepository bookRepository;
 
     public List<Book> getAllBooks() {
-        return repo.findAll();
+        return bookRepository.findAll();
     }
 
-    public Book saveBook(Book book) {
-        return repo.save(book);
+    public List<Book> saveAll(List<Book> book) {
+        return bookRepository.saveAll(book);
     }
 
     public Book getBookById(int id) {
-        return repo.findById(id).orElseThrow(() -> new RuntimeException("Book not found with id: " + id));
+        return bookRepository.findById(id).orElseThrow(() -> new RuntimeException("Book not found with id: " + id));
     }
 }
