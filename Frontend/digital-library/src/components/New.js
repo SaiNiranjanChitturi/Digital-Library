@@ -50,13 +50,13 @@ const NewReleases = () => {
     ];
 
     return (
-        <Box sx={{ minHeight: '100vh', bgcolor: '#f8f9fa' }}>
+        <Box sx={{ minHeight: '100vh', backgroundColor: '#f8f9fa' }}>
             <Header />
             
             {/* Hero Banner */}
             <Box
                 sx={{
-                    bgcolor: '#1e90ff',
+                    backgroundColor: '#1e90ff',
                     color: 'white',
                     py: { xs: 6, md: 10 },
                     background: 'linear-gradient(135deg, #1e90ff 0%, #0062b3 100%)',
@@ -168,7 +168,7 @@ const NewReleases = () => {
                         <Divider />
 
                         {/* Author Section */}
-                        <Box sx={{ p: 4, bgcolor: 'rgba(0,0,0,0.02)' }}>
+                        <Box sx={{ p: 4, backgroundColor: 'rgba(0,0,0,0.02)' }}>
                             <Grid container spacing={4} alignItems="center">
                                 <Grid item xs={12} sm={3} md={2}>
                                     <Avatar

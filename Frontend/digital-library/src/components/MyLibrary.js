@@ -82,7 +82,7 @@ const MyLibrary = () => {
     };
 
     return (
-        <Box sx={{ minHeight: '100vh', bgcolor: '#f8f9fa' }}>
+        <Box sx={{ minHeight: '100vh', backgroundColor: '#f8f9fa' }}>
             <Header />
             
             <Container maxWidth="lg" sx={{ py: { xs: 4, md: 6 } }}>
@@ -153,8 +153,8 @@ const MyLibrary = () => {
                                             <IconButton
                                                 onClick={() => toggleFavorite(book.id)}
                                                 sx={{ 
-                                                    bgcolor: 'white',
-                                                    '&:hover': { bgcolor: 'white' }
+                                                    backgroundColor: 'white',
+                                                    '&:hover': { backgroundColor: 'white' }
                                                 }}
                                             >
                                                 {favorites[book.id] ? 
@@ -167,8 +167,8 @@ const MyLibrary = () => {
                                             <IconButton
                                                 onClick={() => toggleBookmark(book.id)}
                                                 sx={{ 
-                                                    bgcolor: 'white',
-                                                    '&:hover': { bgcolor: 'white' }
+                                                    backgroundColor: 'white',
+                                                    '&:hover': { backgroundColor: 'white' }
                                                 }}
                                             >
                                                 {bookmarks[book.id] ? 
@@ -220,9 +220,9 @@ const MyLibrary = () => {
                                             sx={{
                                                 height: 6,
                                                 borderRadius: 3,
-                                                bgcolor: 'rgba(0,0,0,0.08)',
+                                                backgroundColor: 'rgba(0,0,0,0.08)',
                                                 '& .MuiLinearProgress-bar': {
-                                                    bgcolor: '#0074d9'
+                                                    backgroundColor: '#0074d9'
                                                 }
                                             }}
                                         />
@@ -239,8 +239,8 @@ const MyLibrary = () => {
                                             onClick={() => handleRead(book)}
                                             fullWidth
                                             sx={{
-                                                bgcolor: '#0074d9',
-                                                '&:hover': { bgcolor: '#0062b3' }
+                                                backgroundColor: '#0074d9',
+                                                '&:hover': { backgroundColor: '#0062b3' }
                                             }}
                                         >
                                             Read
@@ -287,7 +287,7 @@ const MyLibrary = () => {
                             {/* Add PDF viewer component here */}
                             <Box sx={{ 
                                 height: '100%',
-                                bgcolor: 'grey.100',
+                                backgroundColor: 'grey.100',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center'

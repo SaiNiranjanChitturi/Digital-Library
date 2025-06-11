@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import {
     Box,
     Container,
@@ -19,7 +20,9 @@ import {
     useTheme,
     useMediaQuery,
     Drawer,
-    Button
+    Button,
+    CircularProgress,
+    Alert
 } from '@mui/material';
 import {
     FilterList as FilterIcon,
@@ -34,6 +37,11 @@ import Footer from './Footer';
 const Collection = () => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+    
+    // State management
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [books, setBooks] = useState([]);
     const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [priceRange, setPriceRange] = useState([0, 100]);
@@ -43,25 +51,39 @@ const Collection = () => {
     const [favorites, setFavorites] = useState({});
     const [showFilters, setShowFilters] = useState(false);
 
-    // Sample categories
+    // Sample categories (you can fetch these from backend if needed)
     const categories = [
         "Fiction", "Non-Fiction", "Science", "Technology", 
         "Business", "Self-Help", "Biography", "History",
         "Arts", "Literature", "Psychology", "Philosophy"
     ];
 
-    // Sample books data (replace with actual data)
-    const books = Array.from({ length: 50 }, (_, i) => ({
-        id: i + 1,
-        title: `Book Title ${i + 1}`,
-        author: `Author Name ${i + 1}`,
-        price: Math.floor(Math.random() * 80) + 20,
-        rating: (Math.random() * 2 + 3).toFixed(1),
-        category: categories[Math.floor(Math.random() * categories.length)],
-        image: `https://picsum.photos/seed/book${i + 1}/300/400`,
-        onSale: Math.random() > 0.7,
-        discount: Math.random() > 0.7 ? 25 : 0
-    }));
+    // Create axios instance
+    const api = axios.create({
+        baseURL: 'http://localhost:8085',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    // Fetch books on component mount
+    useEffect(() => {
+        const fetchBooks = async () => {
+            try {
+                setLoading(true);
+                setError(null);
+                const response = await api.get('/Collection');
+                setBooks(response.data);
+            } catch (err) {
+                setError('Failed to fetch books. Please try again later.');
+                console.error('Error fetching books:', err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchBooks();
+    }, []);
 
     // Filter handlers
     const handlePriceChange = (event, newValue) => {
@@ -110,7 +132,7 @@ const Collection = () => {
             elevation={0}
             sx={{
                 p: 3,
-                bgcolor: 'white',
+                backgroundColor: 'white',
                 borderRadius: 2,
                 boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
                 height: 'fit-content'
@@ -133,7 +155,7 @@ const Collection = () => {
                     sx={{
                         color: '#0074d9',
                         '& .MuiSlider-thumb': {
-                            bgcolor: 'white',
+                            backgroundColor: 'white',
                             border: '2px solid currentColor',
                         }
                     }}
@@ -200,8 +222,8 @@ const Collection = () => {
                     variant="contained"
                     sx={{
                         mb: 3,
-                        bgcolor: showFilters ? '#0062b3' : '#0074d9',
-                        '&:hover': { bgcolor: '#0062b3' }
+                        backgroundColor: showFilters ? '#0062b3' : '#0074d9',
+                        '&:hover': { backgroundColor: '#0062b3' }
                     }}
                 >
                     {isMobile ? 'Show Filters' : (showFilters ? 'Hide Filters' : 'Show Filters')}
@@ -239,109 +261,125 @@ const Collection = () => {
                         </Box>
                     </Drawer>
 
-                    {/* Books Grid */}
+                    {/* Books Grid with Loading and Error States */}
                     <Box sx={{ flex: 1 }}>
-                        <Grid container spacing={3}>
-                            {displayedBooks.map((book) => (
-                                <Grid 
-                                    item 
-                                    xs={12} 
-                                    sm={6} 
-                                    md={showFilters ? 6 : 4} 
-                                    lg={showFilters ? 4 : 3} 
-                                    key={book.id}
-                                >
-                                    <Card
-                                        sx={{
-                                            height: '100%',
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            transition: 'all 0.3s ease',
-                                            '&:hover': {
-                                                transform: 'translateY(-8px)',
-                                                boxShadow: '0 8px 25px rgba(0,0,0,0.1)'
-                                            }
-                                        }}
-                                    >
-                                        <Box sx={{ position: 'relative' }}>
-                                            <CardMedia
-                                                component="img"
-                                                height="240"
-                                                image={book.image}
-                                                alt={book.title}
-                                            />
-                                            {book.onSale && (
-                                                <Chip
-                                                    label={`${book.discount}% OFF`}
-                                                    color="error"
-                                                    sx={{
-                                                        position: 'absolute',
-                                                        top: 16,
-                                                        right: 16
-                                                    }}
-                                                />
-                                            )}
-                                            <IconButton
-                                                onClick={() => toggleFavorite(book.id)}
+                        {loading ? (
+                            <Box sx={{ display: 'flex', justifyContent: 'center', py: 8 }}>
+                                <CircularProgress />
+                            </Box>
+                        ) : error ? (
+                            <Alert severity="error" sx={{ mb: 3 }}>
+                                {error}
+                            </Alert>
+                        ) : displayedBooks.length === 0 ? (
+                            <Alert severity="info" sx={{ mb: 3 }}>
+                                No books found matching your criteria
+                            </Alert>
+                        ) : (
+                            <>
+                                <Grid container spacing={3}>
+                                    {displayedBooks.map((book) => (
+                                        <Grid 
+                                            item 
+                                            xs={12} 
+                                            sm={6} 
+                                            md={showFilters ? 6 : 4} 
+                                            lg={showFilters ? 4 : 3} 
+                                            key={book.id}
+                                        >
+                                            <Card
                                                 sx={{
-                                                    position: 'absolute',
-                                                    top: 16,
-                                                    left: 16,
-                                                    bgcolor: 'white',
-                                                    '&:hover': { bgcolor: 'white' }
+                                                    height: '100%',
+                                                    display: 'flex',
+                                                    flexDirection: 'column',
+                                                    transition: 'all 0.3s ease',
+                                                    '&:hover': {
+                                                        transform: 'translateY(-8px)',
+                                                        boxShadow: '0 8px 25px rgba(0,0,0,0.1)'
+                                                    }
                                                 }}
                                             >
-                                                {favorites[book.id] ? 
-                                                    <FavoriteIcon color="error" /> : 
-                                                    <FavoriteBorderIcon />
-                                                }
-                                            </IconButton>
-                                        </Box>
-                                        <CardContent sx={{ flexGrow: 1 }}>
-                                            <Typography variant="h6" component="h2" gutterBottom>
-                                                {book.title}
-                                            </Typography>
-                                            <Typography variant="body2" color="text.secondary" gutterBottom>
-                                                by {book.author}
-                                            </Typography>
-                                            <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                                                <Rating value={parseFloat(book.rating)} precision={0.5} readOnly size="small" />
-                                                <Typography variant="body2" color="text.secondary" sx={{ ml: 1 }}>
-                                                    ({book.rating})
-                                                </Typography>
-                                            </Box>
-                                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                                <Typography variant="h6" color="primary">
-                                                    ${book.price.toFixed(2)}
-                                                </Typography>
-                                                <Button
-                                                    variant="contained"
-                                                    startIcon={<CartIcon />}
-                                                    size="small"
-                                                    sx={{
-                                                        bgcolor: '#0074d9',
-                                                        '&:hover': { bgcolor: '#0062b3' }
-                                                    }}
-                                                >
-                                                    Add
-                                                </Button>
-                                            </Box>
-                                        </CardContent>
-                                    </Card>
+                                                <Box sx={{ position: 'relative' }}>
+                                                    <CardMedia
+                                                        component="img"
+                                                        height="240"
+                                                        image={book.image}
+                                                        alt={book.title}
+                                                    />
+                                                    {book.onSale && (
+                                                        <Chip
+                                                            label={`${book.discount}% OFF`}
+                                                            color="error"
+                                                            sx={{
+                                                                position: 'absolute',
+                                                                top: 16,
+                                                                right: 16
+                                                            }}
+                                                        />
+                                                    )}
+                                                    <IconButton
+                                                        onClick={() => toggleFavorite(book.id)}
+                                                        sx={{
+                                                            position: 'absolute',
+                                                            top: 16,
+                                                            left: 16,
+                                                            backgroundColor: 'white',
+                                                            '&:hover': { backgroundColor: 'white' }
+                                                        }}
+                                                    >
+                                                        {favorites[book.id] ? 
+                                                            <FavoriteIcon color="error" /> : 
+                                                            <FavoriteBorderIcon />
+                                                        }
+                                                    </IconButton>
+                                                </Box>
+                                                <CardContent sx={{ flexGrow: 1 }}>
+                                                    <Typography variant="h6" component="h2" gutterBottom>
+                                                        {book.title}
+                                                    </Typography>
+                                                    <Typography variant="body2" color="text.secondary" gutterBottom>
+                                                        by {book.author}
+                                                    </Typography>
+                                                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                                                        <Rating value={parseFloat(book.rating)} precision={0.5} readOnly size="small" />
+                                                        <Typography variant="body2" color="text.secondary" sx={{ ml: 1 }}>
+                                                            ({book.rating})
+                                                        </Typography>
+                                                    </Box>
+                                                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                                        <Typography variant="h6" color="primary">
+                                                            ${book.price.toFixed(2)}
+                                                        </Typography>
+                                                        <Button
+                                                            variant="contained"
+                                                            startIcon={<CartIcon />}
+                                                            size="small"
+                                                            sx={{
+                                                                backgroundColor: '#0074d9',
+                                                                '&:hover': { backgroundColor: '#0062b3' }
+                                                            }}
+                                                        >
+                                                            Add
+                                                        </Button>
+                                                    </Box>
+                                                </CardContent>
+                                            </Card>
+                                        </Grid>
+                                    ))}
                                 </Grid>
-                            ))}
-                        </Grid>
 
-                        {/* Pagination */}
-                        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 6 }}>
-                            <Pagination 
-                                count={pageCount} 
-                                page={currentPage}
-                                onChange={handlePageChange}
-                                color="primary"
-                                size={isMobile ? "small" : "medium"}
-                            />
-                        </Box>
+                                {/* Pagination */}
+                                <Box sx={{ display: 'flex', justifyContent: 'center', mt: 6 }}>
+                                    <Pagination 
+                                        count={pageCount}
+                                        page={currentPage}
+                                        onChange={handlePageChange}
+                                        color="primary"
+                                        size={isMobile ? "small" : "medium"}
+                                    />
+                                </Box>
+                            </>
+                        )}
                     </Box>
                 </Box>
             </Container>

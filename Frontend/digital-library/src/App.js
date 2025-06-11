@@ -10,6 +10,7 @@ import Sales from './components/Sales';
 import Collection from './components/Collection';
 import New from './components/New';
 import MyLibrary from './components/MyLibrary';
+import Cart from './components/Cart';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/Home" element={<Home />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/Sale" element={<Sales />} />
         <Route path="/Collection" element={<Collection />} />
         <Route path="/New" element={<New />} />
