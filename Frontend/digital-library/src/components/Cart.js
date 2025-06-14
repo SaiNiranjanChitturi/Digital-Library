@@ -29,20 +29,26 @@ const Cart = ({ cartItems, removeFromCart }) => {
         handleCartClose();
     };
 
+    // Calculate total items considering quantities
+    const totalItems = cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0);
+
+    // Calculate total price considering quantities
+    const totalPrice = cartItems.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0).toFixed(2);
+
     return (
         <>
-            <IconButton 
-                color="inherit" 
+            <IconButton
+                color="inherit"
                 onClick={handleCartClick}
-                sx={{ 
+                sx={{
                     position: 'relative',
                     '&:hover': {
                         backgroundColor: 'rgba(255,255,255,0.1)'
                     }
                 }}
             >
-                <Badge 
-                    badgeContent={cartItems.length} 
+                <Badge
+                    badgeContent={totalItems}
                     color="error"
                     sx={{
                         '& .MuiBadge-badge': {
@@ -69,10 +75,10 @@ const Cart = ({ cartItems, removeFromCart }) => {
                 }}
             >
                 <Typography sx={{ p: 2, fontWeight: 'bold' }}>
-                    Shopping Cart ({cartItems.length})
+                    Shopping Cart ({totalItems})
                 </Typography>
                 <Divider />
-                
+
                 {cartItems.length === 0 ? (
                     <Typography sx={{ p: 2, textAlign: 'center', color: 'text.secondary' }}>
                         Your cart is empty
@@ -82,22 +88,28 @@ const Cart = ({ cartItems, removeFromCart }) => {
                         {cartItems.map((item) => (
                             <MenuItem key={item.id} sx={{ py: 1 }}>
                                 <Box sx={{ display: 'flex', width: '100%', alignItems: 'center' }}>
-                                    <img 
-                                        src={item.cover} 
+                                    <img
+                                        src={item.cover}
                                         alt={item.title}
-                                        style={{ width: 50, height: 70, marginRight: 10 }}
+                                        style={{ width: 50, height: 70, marginRight: 10, objectFit: 'cover' }}
                                     />
                                     <Box sx={{ flex: 1 }}>
                                         <Typography variant="subtitle2">
                                             {item.title}
                                         </Typography>
                                         <Typography variant="body2" color="text.secondary">
-                                            ${item.price}
+                                            ${item.price} × {item.quantity || 1}
+                                        </Typography>
+                                        <Typography variant="body2">
+                                            ${(item.price * (item.quantity || 1)).toFixed(2)}
                                         </Typography>
                                     </Box>
-                                    <IconButton 
-                                        size="small" 
-                                        onClick={() => removeFromCart(item.id)}
+                                    <IconButton
+                                        size="small"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            removeFromCart(item.id);
+                                        }}
                                     >
                                         ×
                                     </IconButton>
@@ -107,12 +119,13 @@ const Cart = ({ cartItems, removeFromCart }) => {
                         <Divider />
                         <Box sx={{ p: 2 }}>
                             <Typography variant="subtitle1" sx={{ mb: 1 }}>
-                                Total: ${cartItems.reduce((sum, item) => sum + item.price, 0).toFixed(2)}
+                                Total: ${totalPrice}
                             </Typography>
-                            <Button 
-                                variant="contained" 
-                                fullWidth 
+                            <Button
+                                variant="contained"
+                                fullWidth
                                 onClick={handleCheckout}
+                                sx={{ mt: 2 }}
                             >
                                 Checkout
                             </Button>
