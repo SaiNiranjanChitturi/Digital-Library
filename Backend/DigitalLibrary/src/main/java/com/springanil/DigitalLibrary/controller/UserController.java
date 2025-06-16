@@ -58,14 +58,14 @@ public class UserController {
         return ResponseEntity.ok(Map.of("message", "Login successful", "token", token));
     }
 
-    @RestController
-    public static class TestController {
-
-        @GetMapping("/hello")
-        public String hello() {
-            return "Backend is up!";
-        }
-    }
+//    @RestController
+//    public static class TestController {
+//
+//        @GetMapping("/hello")
+//        public String hello() {
+//            return "Backend is up!";
+//        }
+//    }
 
 //  BOOK CONTROLLER
 
