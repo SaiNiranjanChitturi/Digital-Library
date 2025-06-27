@@ -41,4 +41,9 @@ public class HomeController {
 //        return categoryService.getAllActiveCategories().toString();
 //    }
 
+    @GetMapping("/sales")
+    public List<Book> getBooksOnSale() {
+        return bookService.getBooksOnSale();
+    }
+
 }

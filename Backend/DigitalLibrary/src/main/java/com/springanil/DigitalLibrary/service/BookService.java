@@ -24,4 +24,10 @@ public class BookService {
     public Book getBookById(int id) {
         return bookRepository.findById(id).orElseThrow(() -> new RuntimeException("Book not found with id: " + id));
     }
+    public List<Book> getBooksOnSale() {
+        return bookRepository.findAll().stream()
+                .filter(Book::isOnSale)
+                .toList();
+    }
+
 }

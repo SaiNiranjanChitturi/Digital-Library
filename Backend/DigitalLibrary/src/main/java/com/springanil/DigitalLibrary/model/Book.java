@@ -50,4 +50,14 @@ public class Book {
     @Column(name = "image_url")
     private String image_url;
 
+    @JsonProperty("on_sale")
+    @Column(name = "on_sale")
+    private boolean onSale;
+    public boolean isOnSale() {
+        return onSale;
+    }
+
+    @JsonProperty("discount")
+    @Column(name = "discount")
+    private double discount;
 }
