@@ -42,8 +42,7 @@ public class HomeController {
 //    }
 
     @GetMapping("/sales")
-    public List<Book> getBooksOnSale() {
-        return bookService.getBooksOnSale();
+    public List<Book> getBooksWithDiscount() {
+        return bookService.getBooksWithDiscount();
     }
-
 }

@@ -60,4 +60,7 @@ public class Book {
     @JsonProperty("discount")
     @Column(name = "discount")
     private double discount;
+    public double getDiscount() {
+        return this.discount;
+    }
 }
